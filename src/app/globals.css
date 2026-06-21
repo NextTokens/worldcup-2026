@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* ── Design tokens (Tailwind v4 CSS-first theme) ───────────────────────── */
+@theme {
+  --color-pitch-50: #f0fdf4;
+  --color-pitch-500: #16a34a;
+  --color-pitch-600: #15803d;
+  --color-pitch-700: #166534;
+
+  --color-ink: #0b1220;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f4f6f8;
+
+  /* Bracket slot states (referenced by components in src/components/bracket) */
+  --color-slot-decided: #0b1220;
+  --color-slot-projected: #64748b;
+  --color-slot-whatif: #7c3aed;
+  --color-slot-your-team: #16a34a;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-surface-muted);
+  color: var(--color-ink);
+  /* Mobile-first: avoid horizontal jank on small screens */
+  overflow-x: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0b1220;
+    color: #e6edf3;
+  }
+}
+
+/* Respect reduced motion for the bracket advance animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
