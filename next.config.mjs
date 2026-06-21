@@ -11,7 +11,7 @@ const nextConfig = {
   images: {
     // Crests/flags/headshots come from external public sources (Wikimedia, crests.football-data.org, etc.)
     remotePatterns: [
-      { protocol: 'https', hostname: 'crests.football-data.org' },
+      { protocol: 'https', hostname: 'a.espncdn.com' },
       { protocol: 'https', hostname: 'upload.wikimedia.org' },
       { protocol: 'https', hostname: 'commons.wikimedia.org' },
       { protocol: 'https', hostname: 'flagcdn.com' },

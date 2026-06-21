@@ -13,26 +13,19 @@ Mobile-first, multi-language Next.js app for the 2026 FIFA World Cup — schedul
 - **Anthropic SDK** (Claude Haiku 4.5 / Sonnet 4.6) — AI summaries (Phase 3)
 - **Vitest** — unit tests (bracket engine)
 
-## Data sources (free, public)
+## Data source (free, keyless)
 
-| Layer | Source | Notes |
-|---|---|---|
-| Fixtures + standings | **football-data.org** (free tier) | needs `FOOTBALL_DATA_API_KEY`; attribution required |
-| Schedule/groups fallback | **OpenFootball** (CC0) | loaded at runtime when no key |
-| Squads, localized names | **Wikidata / Wikipedia** | CC0 / CC BY-SA |
-| Live in-match events | **ESPN** (Path A, unofficial) | Phase 2; personal/non-commercial |
-
-The knockout bracket structure is verified and vendored in `src/data/bracket-2026.seed.json`.
+The app runs on a **single source: ESPN's public JSON API** (unofficial, personal/non-commercial) — fixtures, live scores, in-match events, and **current group standings**, no API key. The knockout bracket structure is verified and vendored in `src/data/bracket-2026.seed.json`; squads/localized names can be enriched from Wikidata (CC0).
 
 ## Getting started
 
 ```bash
 npm install
-cp .env.example .env.local   # add FOOTBALL_DATA_API_KEY for live data (optional in dev)
+cp .env.example .env.local   # all keys optional (add ANTHROPIC_API_KEY for AI prose)
 npm run dev                  # http://localhost:3000
 ```
 
-Without an API key the app still renders the real fixture structure from OpenFootball and the full bracket from the verified seed.
+No keys required — fixtures, standings, and the bracket populate from ESPN out of the box.
 
 ## Scripts
 

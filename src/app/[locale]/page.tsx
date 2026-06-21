@@ -57,9 +57,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {matches.length === 0 && (
         <p className="rounded-lg border border-dashed border-black/15 px-3 py-8 text-center text-sm opacity-70">
-          No fixtures loaded. Set <code className="font-mono">FOOTBALL_DATA_API_KEY</code> for
-          authoritative data; the free OpenFootball schedule loads at runtime otherwise. (Source:{' '}
-          {catalogSourceName()})
+          Couldn&apos;t load fixtures right now — please try again. (Source: {catalogSourceName()})
         </p>
       )}
     </div>

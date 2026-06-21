@@ -1,19 +1,12 @@
 import type { MatchDataProvider } from './provider';
-import { FootballDataProvider } from './providers/footballData';
-import { OpenFootballProvider } from './providers/openfootball';
+import { EspnCatalogProvider } from './providers/espnCatalog';
 
 /**
- * Provider selection (ARCHITECTURE.md §2). The catalog source is football-data.org
- * when an API key is present (real UTC fixtures + standings), otherwise the free
- * OpenFootball static schedule so the app still renders the real structure.
- *
- * The LIVE provider (ESPN, Path A) is wired in Phase 2; selected via LIVE_PROVIDER.
+ * Single data source: ESPN (free, no key) — fixtures, standings, teams, live.
+ * One path, no environment-specific fallbacks.
  */
 export function getCatalogProvider(): MatchDataProvider {
-  if (process.env.FOOTBALL_DATA_API_KEY) {
-    return new FootballDataProvider();
-  }
-  return new OpenFootballProvider();
+  return new EspnCatalogProvider();
 }
 
 export function catalogSourceName(): string {
