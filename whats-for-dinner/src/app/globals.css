@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/*
+ * Warm, kitchen-ish palette. Everything is a token so dark mode is one block
+ * rather than a hundred `dark:` variants.
+ */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --color-crust: #fdf8f3;
+  --color-surface: #ffffff;
+  --color-surface-2: #f6efe7;
+  --color-line: #e7dbcd;
+  --color-ink: #2a211b;
+  --color-ink-soft: #6d5f54;
+  --color-brand: #c2410c;
+  --color-brand-soft: #fde7d3;
+  --color-leaf: #3f7d4e;
+  --color-leaf-soft: #e2f1e5;
+  --color-warn: #b45309;
+  --color-warn-soft: #fdf0d8;
+}
+
+:root {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --color-crust: #17120f;
+    --color-surface: #211a16;
+    --color-surface-2: #2b221c;
+    --color-line: #3b302a;
+    --color-ink: #f4ece5;
+    --color-ink-soft: #b5a496;
+    --color-brand: #fb923c;
+    --color-brand-soft: #3a2113;
+    --color-leaf: #7bbd8b;
+    --color-leaf-soft: #1d2f22;
+    --color-warn: #f0b45c;
+    --color-warn-soft: #33260f;
+  }
+}
+
+html,
+body {
+  background: var(--color-crust);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Reusable pieces — these appear on every screen, so they earn a class.
+   Tailwind v4 cannot `@apply` one custom class inside another, so the button
+   variants spell out the shared base rather than composing it. */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface p-4 shadow-sm;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           transition-colors disabled:cursor-not-allowed disabled:opacity-50
+           bg-brand text-white hover:opacity-90;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           transition-colors disabled:cursor-not-allowed disabled:opacity-50
+           border border-line bg-surface text-ink hover:bg-surface-2;
+  }
+
+  .btn-quiet {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-2 py-1 text-xs font-semibold
+           transition-colors disabled:cursor-not-allowed disabled:opacity-50
+           text-ink-soft hover:text-ink;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-ink
+           outline-none placeholder:text-ink-soft focus:border-brand;
+  }
+
+  .label {
+    @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-ink-soft;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+
+  .section-title {
+    @apply text-lg font-bold tracking-tight;
+  }
+}
+
+/* The bottom nav is fixed; keep content clear of it on phones. */
+.page {
+  @apply mx-auto w-full max-w-3xl px-4 pb-28 pt-4 sm:pb-12;
+}
